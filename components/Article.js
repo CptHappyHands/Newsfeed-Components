@@ -86,7 +86,14 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+{
+  title: "OH YEAH: a Randy Savage memoir",
+  date: '4/26/87',
+  firstParagraph: 'Hey freak show! Youre going nowhere. I\'ve got you three minutes',
+  secondParagraph: 'I\'m the cream of the crop!',
+  thirdParagraph: 'BONESAW IS READY'
+}
 ];
 
 /*
@@ -114,3 +121,56 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+const target = document.querySelector('.articles')
+
+function articleMaker(articleObj) {
+  const article = document.createElement('div');
+  const title = document.createElement('h2');
+  const date = document.createElement('p');
+  const paragraph1 = document.createElement('p');
+  const paragraph2 = document.createElement('p');
+  const paragraph3 = document.createElement('p');
+  const spanButton = document.createElement('span');
+
+  article.appendChild(title);
+  article.appendChild(date);
+  article.appendChild(paragraph1);
+  article.appendChild(paragraph2);
+  article.appendChild(paragraph3);
+  article.appendChild(spanButton);
+
+  article.classList.add('article');
+  title.classList.add('title');
+  date.classList.add('date');
+  paragraph1.classList.add('firstParagraph')
+  paragraph2.classList.add('secondParagraph')
+  paragraph3.classList.add('thirdParagraph')
+  spanButton.classList.add('expandButton')
+
+  title.textContent = articleObj.title;
+  date.textContent = articleObj.date;
+  paragraph1.textContent = articleObj.firstParagraph
+  paragraph2.textContent = articleObj.secondParagraph
+  paragraph3.textContent = articleObj.thirdParagraph
+  spanButton.textContent = "+";
+
+
+  spanButton.addEventListener('click', (event) => {
+    article.classList.toggle('article-open')
+  })
+
+  return article;
+}
+
+
+// data.forEach(obj => {
+//   const x = articleMaker(obj);
+//   target.appendChild(x);
+// })
+const articleElements = data.map(data => {
+  return articleMaker(data)
+})
+
+articleElements.forEach(elem => target.appendChild(elem));
+
+console.log(articleElements);
